@@ -43,13 +43,13 @@ public class BodyMover : MonoBehaviour
             transform.position += transform.right * Time.deltaTime * Input.GetAxis("Horizontal") * speed;
             //    transform.Translate(transform.right * Time.deltaTime * Input.GetAxis("Horizontal"));
             //  Debug.DrawRay(transform.position, transform.right * 10, Color.red, 1f);
-            Debug.Log("CheckHeight " + Vector3.Distance(HitDown.point, transform.position) + " with hitpoint " + HitDown.point);
+           // Debug.Log("CheckHeight " + Vector3.Distance(HitDown.point, transform.position) + " with hitpoint " + HitDown.point);
             if (!Mathf.Approximately(groundClearance, Vector3.Distance(HitDown.point, transform.position)))
             {
 
                 Vector3 adjustedPosition = HitDown.point + (HitDown.normal * groundClearance);
-                Debug.Log("Adjusting height  " + Vector3.Distance(HitDown.point, transform.position));
-                Debug.Log("Moving Towards " + adjustedPosition + " with normal " + HitDown.normal + " and ground clearance of " + groundClearance);
+              //  Debug.Log("Adjusting height  " + Vector3.Distance(HitDown.point, transform.position));
+            //    Debug.Log("Moving Towards " + adjustedPosition + " with normal " + HitDown.normal + " and ground clearance of " + groundClearance);
                 transform.position = Vector3.MoveTowards(transform.position, adjustedPosition, Time.deltaTime);
             }
             //  Debug.DrawRay(HitDown.point, HitDown.normal * 3, Color.green, 1f);
@@ -77,8 +77,8 @@ public class BodyMover : MonoBehaviour
       //  Debug.DrawRay(transform.position, -transform.right * lookAheadRayCastDistance, Color.green, 1f);
 
         Debug.DrawRay(transform.position, -transform.up, Color.white);
-        Debug.Log("Hit  point down " + HitDown.point + " normal " + HitDown.normal);
-        Debug.Log("Hit  point front " + hitSide.point + " normal " + hitSide.normal);
+      //  Debug.Log("Hit  point down " + HitDown.point + " normal " + HitDown.normal);
+      //  Debug.Log("Hit  point front " + hitSide.point + " normal " + hitSide.normal);
       
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation,
