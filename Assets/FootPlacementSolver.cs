@@ -10,7 +10,7 @@ public class FootPlacementSolver : MonoBehaviour
    Transform[] defaultFootPositions;
     List<Vector2> hits = new List<Vector2>(); //RaycastHits from scan
     Vector2[] footTargetNextPositions;
-    Vector2[] footTargetNextHalfwayPoint;
+    Vector2[] footTargetHalfwayPoint;
     [SerializeField] float gaitLength = 2;
    [SerializeField]float footSpeed = 2;
 
@@ -43,11 +43,7 @@ public class FootPlacementSolver : MonoBehaviour
 
     // Start is called before the first frame update
 
-    struct foot
-    {
-        Transform transform;
-
-    }
+   
     void Start()
     {
         defaultFootPositions = new Transform[FootTargets.Length];
@@ -64,6 +60,7 @@ public class FootPlacementSolver : MonoBehaviour
             footTargetNextPositions[i] = defaultFootPositions[i].position;
             FootTargets[i].position = footTargetNextPositions[i];
             _currentFootStates[i] = FOOTSTATE.MOVING_TO_PLANT;
+            defaultFootPositions[i].gameObject.name = "DefaultFootPosition" + i;
         }
     }
 
