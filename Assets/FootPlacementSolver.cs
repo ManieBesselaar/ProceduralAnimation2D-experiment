@@ -28,7 +28,7 @@ public class FootPlacementSolver : MonoBehaviour
     }
     FOOTSTATE[] _currentFootStates;
     int _numberOfPlantedLegs = 0;
-
+    [SerializeField] FootTarget[] extraFeet;
 
     /*
      * TODO: 
@@ -61,6 +61,11 @@ public class FootPlacementSolver : MonoBehaviour
             FootTargets[i].position = footTargetNextPositions[i];
             _currentFootStates[i] = FOOTSTATE.MOVING_TO_PLANT;
             defaultFootPositions[i].gameObject.name = "DefaultFootPosition" + i;
+        }
+
+        foreach(FootTarget foot in extraFeet)
+        {
+            foot.Init(gaitLength,footSpeed,footLiftHeight,groundLayer,footCastDepth,targetDistanceTolerance,transform);
         }
     }
 
@@ -103,16 +108,16 @@ public class FootPlacementSolver : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(nextPos, -transform.up,footCastDepth,groundLayer );
         Debug.DrawRay(nextPos, hit.point - nextPos, Color.red,Time.deltaTime);
-        Debug.Log(" Nextpos before " + nextPos); 
+      //  Debug.Log(" Nextpos before " + nextPos); 
         if( hit.point != Vector2.zero)
         {
             nextPos = hit.point;
-            Debug.Log(" Nextpos after true " + nextPos);
+     //       Debug.Log(" Nextpos after true " + nextPos);
             result = hit.point;
             return true;
         }
         result = nextPos;
-        Debug.Log(" Nextpos after false " + nextPos);
+      //  Debug.Log(" Nextpos after false " + nextPos);
         return false;
     }
 
@@ -138,8 +143,8 @@ public class FootPlacementSolver : MonoBehaviour
                 Vector2 liftVector = transform.up * footLiftHeight;
                 footLiftTargets[i] = tmpTarget + liftVector;
                 // footLiftTargets[i] = tmpTarget;
-                Debug.Log("Lift target calculated at " + footLiftTargets[i] + " using foot pos " + FootTargets[i].position +
-                    " and nextPos   " + footTargetNextPositions[i] + " tmpTarget was set to  " + tmpTarget + " the liftvector was " + liftVector);
+           //     Debug.Log("Lift target calculated at " + footLiftTargets[i] + " using foot pos " + FootTargets[i].position +
+           //         " and nextPos   " + footTargetNextPositions[i] + " tmpTarget was set to  " + tmpTarget + " the liftvector was " + liftVector);
                 _currentFootStates[i] = FOOTSTATE.LIFTING;
                 _numberOfPlantedLegs--;
              
